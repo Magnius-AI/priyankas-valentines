@@ -664,6 +664,22 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
+.spotify-embed {
+    text-align: center;
+}
+
+.spotify-embed h3 {
+    font-size: 1.8rem;
+    color: var(--pink-deep);
+    margin-bottom: 20px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.spotify-embed iframe {
+    box-shadow: var(--shadow-medium);
+    margin: 0 auto;
+}
+
 .songs-list h3 {
     font-size: 1.5rem;
     color: var(--pink-deep);

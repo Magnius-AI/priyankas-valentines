@@ -8,8 +8,8 @@
 // ========================================
 const CONFIG = {
     // Valentine's Day in Nepal Time (UTC+5:45)
-    // Feb 14, 2025 00:00:00 Nepal Time = Feb 13, 2025 18:15:00 UTC
-    valentinesDay: new Date('2025-02-14T00:00:00+05:45'),
+    // Feb 14, 2026 00:00:00 Nepal Time = Feb 13, 2026 18:15:00 UTC
+    valentinesDay: new Date('2026-02-14T00:00:00+05:45'),
     
     // The password
     password: 'Only4PriyankaTiwari!',
@@ -62,21 +62,27 @@ function updateCountdown() {
 function checkPassword() {
     const input = document.getElementById('password-input');
     const error = document.getElementById('password-error');
-    
+
     if (input.value === CONFIG.password) {
         // Correct password!
+        // Stop the countdown timer to prevent it from showing password screen again
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+
         document.getElementById('password-screen').classList.add('hidden');
         document.getElementById('main-content').classList.remove('hidden');
         document.getElementById('music-player').classList.remove('hidden');
-        
+
         // Initialize everything
         initDaysTogether();
         initQuiz();
         createFloatingHearts();
-        
+
         // Smooth scroll to top
         window.scrollTo(0, 0);
-        
+
         // Play celebration effect
         celebrateEntry();
     } else {
@@ -466,10 +472,12 @@ function closePopup() {
 // ========================================
 // Initialize
 // ========================================
+let countdownInterval = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Start countdown timer
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    countdownInterval = setInterval(updateCountdown, 1000);
     
     // For testing: add ?unlock to URL to skip countdown
     if (window.location.search.includes('unlock')) {
