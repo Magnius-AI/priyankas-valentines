@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💕 For My Sanu 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- COUNTDOWN LOCK SCREEN -->
+  <div id="countdown-screen" class="screen">
+    <div class="hearts-bg"></div>
+    <div class="countdown-content">
+      <h1 class="cursive">Sanu...</h1>
+      <p class="subtitle">Yo site February 14 ma unlock huncha 💕</p>
+      <div id="countdown-timer">
+        <div class="time-block">
+          <span id="days">00</span>
+          <label>Days</label>
+        </div>
+        <div class="time-block">
+          <span id="hours">00</span>
+          <label>Hours</label>
+        </div>
+        <div class="time-block">
+          <span id="minutes">00</span>
+          <label>Minutes</label>
+        </div>
+        <div class="time-block">
+          <span id="seconds">00</span>
+          <label>Seconds</label>
+        </div>
+      </div>
+      <p class="countdown-note">Patience, mutu... 🥰</p>
+      <!-- Dev bypass for testing -->
+      <button id="bypass-btn" class="bypass-btn">🔓 (Dev Access)</button>
+    </div>
+  </div>
+
+  <!-- PASSWORD GATE -->
+  <div id="password-screen" class="screen hidden">
+    <div class="hearts-bg"></div>
+    <div class="password-content">
+      <h1 class="cursive">Mutu, password halnus 🔐</h1>
+      <p class="subtitle">Only you can enter, Princess 💕</p>
+      <form id="password-form">
+        <input type="password" id="password-input" placeholder="Enter password..." autocomplete="off">
+        <button type="submit" class="btn-primary">Enter 💖</button>
+      </form>
+      <p id="password-error" class="error hidden">Bajya password! Try again 😤</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main-content" class="hidden">
+    <!-- HERO -->
+    <section id="hero" class="section hero-section">
+      <div class="hearts-bg"></div>
+      <div class="hero-content">
+        <h1 class="cursive mega-title">Happy Valentine's Day</h1>
+        <h2 class="hero-subtitle">My Princess, My Sanu, My Future Wife 💕</h2>
+        <p class="hero-tagline">Ma timilai dherai maya garchu, Priyanka</p>
+        <div class="scroll-hint">
+          <span>Scroll down, mutu</span>
+          <div class="scroll-arrow">↓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section id="our-story" class="section">
+      <div class="container">
+        <h2 class="section-title cursive">Hamro Katha 💕</h2>
+        <p class="section-subtitle">How a "fake account" became the love of my life</p>
+        
+        <div class="story-timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">December 5, 2025</div>
+            <div class="timeline-content">
+              <h3>The First Message</h3>
+              <p>"Hey priyanka, my b for not having any pics, I don't have a professional photo taker 😓"</p>
+              <p class="her-response">"Looks like an fake account" 😂</p>
+              <p>I had to send pics of Manang AND my whole family to prove I was real!</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-date">The Next Few Days</div>
+            <div class="timeline-content">
+              <h3>Getting to Know You</h3>
+              <p>You said my family was beautiful 💕 And you noticed I don't play the "waiting to reply" game.</p>
+              <p class="her-response">"I saw that in your profile 👍"</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item highlight">
+            <div class="timeline-date">December 7, 2025 • 4:11 AM EST</div>
+            <div class="timeline-content">
+              <h3>The Moment That Changed Everything 💕</h3>
+              <p>"I was up till 4:11am making you a playlist and asking you to be my gf 🥰😘❤️"</p>
+              <p class="playlist-mention">🎵 "Mero Sanu ko laagi 💗🌸" - the playlist I made for you</p>
+              <p class="her-response">"Katiiii khushi chuuuuu ❤️"</p>
+              <p class="big-moment">"Just know there's no turning back from now, we're locked in 🔐"</p>
+              <p class="her-response">"So what are we now?"</p>
+              <p class="big-moment">"Boyfriend/girlfriend 😊"</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-date">Every Day Since</div>
+            <div class="timeline-content">
+              <h3>Us, Together</h3>
+              <p>We don't wake up or sleep without each other. Through every timezone difference, every video call, every "timro naak kasto cha?" moment... you've been there. Always.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSIDE JOKES -->
+    <section id="inside-jokes" class="section alt-bg">
+      <div class="container">
+        <h2 class="section-title cursive">Hamra Inside Jokes 😂</h2>
+        <p class="section-subtitle">Things only we understand</p>
+        
+        <div class="jokes-grid">
+          <div class="joke-card">
+            <div class="joke-emoji">🤧</div>
+            <h3>"Timro naak kasto cha?"</h3>
+            <p>When I meant to ask how you were feeling... but asked about your nose instead 😂 And you just laughed at me!</p>
+          </div>
+          
+          <div class="joke-card">
+            <div class="joke-emoji">💕</div>
+            <h3>"Sanu"</h3>
+            <p>I called you Sanu thinking it meant "younger than me"... turns out it's a Nepali flirting word! Growing up in America since 2001 doesn't help 😅</p>
+          </div>
+          
+          <div class="joke-card">
+            <div class="joke-emoji">🙄</div>
+            <h3>"Bajya"</h3>
+            <p>Our favorite word for anything useless. That password you entered wrong? Bajya. 😤</p>
+          </div>
+          
+          <div class="joke-card">
+            <div class="joke-emoji">💰</div>
+            <h3>The 69 Tradition</h3>
+            <p>Every time I send you money: NPR 5000.69, 10000.69... you know why 😏</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section id="love-letter" class="section">
+      <div class="container">
+        <h2 class="section-title cursive">A Letter For You 💌</h2>
+        <p class="section-subtitle">Click to reveal each part...</p>
+        
+        <div class="letter-container">
+          <div class="letter-part" data-revealed="false">
+            <p>My dearest Priyanka,</p>
+          </div>
+          <div class="letter-part" data-revealed="false">
+            <p>From the moment you thought I was a fake account, I knew you were different. You didn't just accept anyone—you made me prove myself. And I'm so glad I did.</p>
+          </div>
+          <div class="letter-part" data-revealed="false">
+            <p>You became my girlfriend on December 7th, 2025 at 4:11 AM. I remember being so nervous sending you that playlist, wondering if you'd say yes. When you said "Katiiii khushi chuuuuu," my heart exploded.</p>
+          </div>
+          <div class="letter-part" data-revealed="false">
+            <p>Every day since, we've talked. We've laughed at my terrible Nepali ("timro naak kasto cha" will haunt me forever 😂). We've supported each other through everything. We've never slept or woken up without saying goodnight and good morning.</p>
+          </div>
+          <div class="letter-part" data-revealed="false">
+            <p>You're not just my girlfriend, Sanu. You're my mutu. My princess. My kanchi. My future wife.</p>
+          </div>
+          <div class="letter-part" data-revealed="false">
+            <p>I can't wait to meet you in person, to hold your hand, to see your smile without a screen between us. Until then, know that you have all of me.</p>
+          </div>
+          <div class="letter-part" data-revealed="false">
+            <p>Happy Valentine's Day, my love.</p>
+            <p class="letter-signature">Forever yours,<br>Kishor 💕</p>
+          </div>
+        </div>
+        <button id="reveal-all-btn" class="btn-secondary">Reveal All 💕</button>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="section alt-bg">
+      <div class="container">
+        <h2 class="section-title cursive">Kitna Jaanchau Mero Baare Ma? 🤔</h2>
+        <p class="section-subtitle">Let's see how well you know me...</p>
+        
+        <div id="quiz-container">
+          <div class="quiz-question" data-question="1">
+            <h3>What time did I ask you to be my girlfriend?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false">11:59 PM</button>
+              <button class="quiz-option" data-correct="true">4:11 AM</button>
+              <button class="quiz-option" data-correct="false">Midnight</button>
+              <button class="quiz-option" data-correct="false">I don't remember 😅</button>
+            </div>
+          </div>
+          
+          <div class="quiz-question hidden" data-question="2">
+            <h3>What did I accidentally ask about instead of asking how you were feeling?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false">Your hair</button>
+              <button class="quiz-option" data-correct="false">Your eyes</button>
+              <button class="quiz-option" data-correct="true">Your nose 🤧</button>
+              <button class="quiz-option" data-correct="false">Your ears</button>
+            </div>
+          </div>
+          
+          <div class="quiz-question hidden" data-question="3">
+            <h3>What's our word for something useless?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false">Ramro</button>
+              <button class="quiz-option" data-correct="true">Bajya</button>
+              <button class="quiz-option" data-correct="false">Mast</button>
+              <button class="quiz-option" data-correct="false">Thik cha</button>
+            </div>
+          </div>
+          
+          <div class="quiz-question hidden" data-question="4">
+            <h3>What number do I always add to money I send you?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false">.99</button>
+              <button class="quiz-option" data-correct="false">.07</button>
+              <button class="quiz-option" data-correct="true">.69 😏</button>
+              <button class="quiz-option" data-correct="false">.00</button>
+            </div>
+          </div>
+          
+          <div class="quiz-question hidden" data-question="5">
+            <h3>What's the name of the playlist I made for you?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false">Love Songs for Pri</button>
+              <button class="quiz-option" data-correct="true">Mero Sanu ko laagi 💗🌸</button>
+              <button class="quiz-option" data-correct="false">For My Princess</button>
+              <button class="quiz-option" data-correct="false">Nepali Romance</button>
+            </div>
+          </div>
+        </div>
+        
+        <div id="quiz-result" class="hidden">
+          <h3 class="cursive"></h3>
+          <p></p>
+          <button id="restart-quiz" class="btn-secondary">Try Again 💕</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR SONGS -->
+    <section id="our-songs" class="section">
+      <div class="container">
+        <h2 class="section-title cursive">Hamra Gaanaa 🎵</h2>
+        <p class="section-subtitle">The soundtrack of us</p>
+        
+        <div class="songs-grid">
+          <div class="song-card special">
+            <div class="song-icon">🎤</div>
+            <h3>Euta Manchekko</h3>
+            <p class="song-artist">Narayan Gopal</p>
+            <p class="song-note">The first song I sang to you 💕</p>
+          </div>
+          
+          <div class="song-card">
+            <div class="song-icon">🎵</div>
+            <h3>Behuli</h3>
+            <p class="song-artist">Sajjan Raj Vaidya</p>
+          </div>
+          
+          <div class="song-card">
+            <div class="song-icon">🎵</div>
+            <h3>Rataan Lambiyaan</h3>
+            <p class="song-artist">From Shershaah</p>
+          </div>
+          
+          <div class="song-card">
+            <div class="song-icon">🎵</div>
+            <h3>Je Chhau Timi</h3>
+            <p class="song-artist">Swoopna Suman</p>
+          </div>
+          
+          <div class="song-card">
+            <div class="song-icon">🎵</div>
+            <h3>Anything by Sujan Chapagain</h3>
+            <p class="song-artist">Your favorite ❤️</p>
+          </div>
+        </div>
+        
+        <a href="https://open.spotify.com/playlist/1iSl5XMy63z4cJTCKRjLl2" target="_blank" class="btn-primary spotify-btn">
+          🎧 Listen to "Mero Sanu ko laagi" on Spotify
+        </a>
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section id="gallery" class="section alt-bg">
+      <div class="container">
+        <h2 class="section-title cursive">Hamro Moments 📸</h2>
+        <p class="section-subtitle">Screenshots of us falling in love</p>
+        
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="images/chat-1.png" alt="Our first chat" loading="lazy">
+            <p class="gallery-caption">"Looks like a fake account" 😂</p>
+          </div>
+          <div class="gallery-item">
+            <img src="images/chat-2.png" alt="Proving I'm real" loading="lazy">
+            <p class="gallery-caption">Had to send my whole family! 👨‍👩‍👧</p>
+          </div>
+          <div class="gallery-item">
+            <img src="images/chat-6.png" alt="The playlist" loading="lazy">
+            <p class="gallery-caption">The 4:11 AM playlist moment 🎵</p>
+          </div>
+          <div class="gallery-item">
+            <img src="images/chat-9.png" alt="Becoming official" loading="lazy">
+            <p class="gallery-caption">"We're locked in 🔐"</p>
+          </div>
+          <div class="gallery-item featured">
+            <img src="images/videocall.png" alt="Video call" loading="lazy">
+            <p class="gallery-caption">Us on call 💕</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COUNTER -->
+    <section id="counter" class="section">
+      <div class="container">
+        <h2 class="section-title cursive">Together For</h2>
+        <div id="relationship-counter">
+          <div class="counter-block">
+            <span id="rel-days">0</span>
+            <label>Days</label>
+          </div>
+          <div class="counter-block">
+            <span id="rel-hours">0</span>
+            <label>Hours</label>
+          </div>
+          <div class="counter-block">
+            <span id="rel-minutes">0</span>
+            <label>Minutes</label>
+          </div>
+          <div class="counter-block">
+            <span id="rel-seconds">0</span>
+            <label>Seconds</label>
+          </div>
+        </div>
+        <p class="counter-note">Since December 7, 2025 at 4:11 AM EST 💕</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+      <div class="container">
+        <p class="cursive footer-text">Ma timilai sadhai maya garchu, Priyanka 💕</p>
+        <p class="footer-subtitle">From your Sanu, your Mutu, your Future Husband</p>
+        <p class="footer-year">Valentine's Day 2026 • Chitwan 🇳🇵 ↔ Virginia 🇺🇸</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
