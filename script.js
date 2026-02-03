@@ -23,7 +23,7 @@ const CONFIG = {
         "Wrong! Only my Sanu knows this 💕",
         "Try again, mutu! 😘",
         "Haha nice try! But you're not my kanchi 😏",
-        "Galat! Are you even Priyanka? 🤨",
+        "Galat! Are you sure you're Priyanka? 🤨",
         "Nai nai nai! Think harder, Princess 💭",
         "So close! (Just kidding, not even close 😂)",
         "Hint: It's about YOU, sanu! 💕"
@@ -64,6 +64,7 @@ function checkPassword() {
     const error = document.getElementById('password-error');
 
     if (input.value === CONFIG.password) {
+<<<<<<< HEAD
         // Correct password!
         // Stop the countdown timer to prevent it from showing password screen again
         if (countdownInterval) {
@@ -85,6 +86,11 @@ function checkPassword() {
 
         // Play celebration effect
         celebrateEntry();
+=======
+        // Correct password! Show valentine question
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('valentine-question').classList.remove('hidden');
+>>>>>>> 464ab04fad4c4f134a962f19b5adea3d83365b04
     } else {
         // Wrong password
         error.textContent = CONFIG.wrongPasswordMessages[CONFIG.wrongPasswordIndex];
@@ -111,6 +117,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ========================================
+// Valentine Question (Yes/No)
+// ========================================
+let noClickCount = 0;
+
+function sayYes() {
+    const responseDiv = document.getElementById('valentine-response');
+    const responseText = document.getElementById('response-text');
+    
+    responseDiv.classList.remove('hidden');
+    responseText.innerHTML = "I knew you'd say yes! 💕💕💕<br>Mero sanu, I love you so much!";
+    
+    // Hide buttons
+    document.querySelector('.valentine-buttons').style.display = 'none';
+    
+    // Celebration effect
+    celebrateEntry();
+    
+    // After 2 seconds, show main content
+    setTimeout(() => {
+        document.getElementById('valentine-question').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        document.getElementById('music-player').classList.remove('hidden');
+        
+        // Initialize everything
+        initDaysTogether();
+        initQuiz();
+        createFloatingHearts();
+        
+        // Smooth scroll to top
+        window.scrollTo(0, 0);
+    }, 2500);
+}
+
+function moveNoButton() {
+    const noBtn = document.getElementById('no-btn');
+    const container = document.querySelector('.valentine-content');
+    const containerRect = container.getBoundingClientRect();
+    
+    // Calculate random position within container bounds
+    const maxX = containerRect.width - noBtn.offsetWidth - 40;
+    const maxY = containerRect.height - noBtn.offsetHeight - 40;
+    
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+    noBtn.style.transition = 'all 0.1s ease';
+}
+
+function clickedNo() {
+    noClickCount++;
+    
+    const responseDiv = document.getElementById('valentine-response');
+    const responseText = document.getElementById('response-text');
+    
+    responseDiv.classList.remove('hidden');
+    responseText.innerHTML = "You're nisturi, you know that 😢";
+    
+    // After 1 second, show the "stuck with me" message
+    setTimeout(() => {
+        responseText.innerHTML = "Too bad you're stuck with me for life 😊💕";
+        
+        // After another 1.5 seconds, proceed anyway
+        setTimeout(() => {
+            document.getElementById('valentine-question').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            document.getElementById('music-player').classList.remove('hidden');
+            
+            // Initialize everything
+            initDaysTogether();
+            initQuiz();
+            createFloatingHearts();
+            
+            // Smooth scroll to top
+            window.scrollTo(0, 0);
+            
+            celebrateEntry();
+        }, 1500);
+    }, 1000);
+}
 
 // ========================================
 // Days Together Counter
@@ -143,7 +233,7 @@ const quizQuestions = [
         correct: 2,
         response: {
             correct: "Yes! Dil Mil brought us together! 💕",
-            wrong: "Nope! It was Dil Mil — where I found my soulmate 🥰"
+            wrong: "Nope! It was Dil Mil. Where I found my soulmate 🥰"
         }
     },
     {
@@ -152,7 +242,7 @@ const quizQuestions = [
         correct: 1,
         response: {
             correct: "4:11 AM! You remembered! 💝",
-            wrong: "It was 4:11 AM — the most magical time 🌙"
+            wrong: "It was 4:11 AM. The most magical time 🌙"
         }
     },
     {
@@ -184,16 +274,16 @@ const quizQuestions = [
         correct: 1,
         response: {
             correct: "And it WORKED! 😏💕",
-            wrong: "It was 'Let me give you a reason to delete this app' — and you did! 😏"
+            wrong: "It was 'Let me give you a reason to delete this app'. And you did! 😏"
         }
     },
     {
-        question: "What did you call me when you thought I was fake? 😂",
-        options: ["Catfish", "Fake account", "Scammer", "Bot"],
+        question: "What did you think I was when we first talked? 😂",
+        options: ["A catfish", "A fake account", "A scammer", "A bot"],
         correct: 1,
         response: {
             correct: "Haha yes! You were so suspicious 😂",
-            wrong: "You literally said 'this is a fake account' energy 😂💀"
+            wrong: "You literally said 'Looks like an fake account' 😂💀"
         }
     },
     {
@@ -225,7 +315,7 @@ const quizQuestions = [
         correct: 1,
         response: {
             correct: "TIMRO NAAK KASTO CHA 😂😂😂",
-            wrong: "It's 'Timro naak kasto cha?' — our classic 😂"
+            wrong: "It's 'Timro naak kasto cha?' Our classic 😂"
         }
     },
     {
@@ -324,7 +414,7 @@ function showQuizResult() {
         message = `
             <h3>Perfect Score! 💯💕</h3>
             <p>You got ${score}/${quizQuestions.length} correct!</p>
-            <p>Of course you did — you ARE my Princess! You know everything about us because you're the most important part of my life. I love you! 💕</p>
+            <p>Of course you did. You ARE my Princess! You know everything about us because you're the most important part of my life. I love you! 💕</p>
         `;
     } else if (percentage >= 70) {
         message = `
@@ -485,10 +575,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('password-screen').classList.remove('hidden');
     }
     
+    // For testing: add ?valentine to URL to skip to valentine question
+    if (window.location.search.includes('valentine')) {
+        document.getElementById('countdown-screen').classList.add('hidden');
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('valentine-question').classList.remove('hidden');
+    }
+    
     // For testing: add ?skip to URL to skip everything
     if (window.location.search.includes('skip')) {
         document.getElementById('countdown-screen').classList.add('hidden');
         document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('valentine-question').classList.add('hidden');
         document.getElementById('main-content').classList.remove('hidden');
         document.getElementById('music-player').classList.remove('hidden');
         initDaysTogether();

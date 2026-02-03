@@ -189,6 +189,87 @@ body {
     max-width: 500px;
 }
 
+/* ========================================
+   Valentine Question Screen
+   ======================================== */
+.valentine-content {
+    text-align: center;
+    z-index: 1;
+    padding: 40px;
+    max-width: 600px;
+    position: relative;
+    min-height: 400px;
+}
+
+.valentine-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--pink-deep);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.valentine-ask {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-dark);
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.valentine-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+#yes-btn {
+    padding: 20px 50px;
+    font-size: 1.5rem;
+    background: var(--gradient-sunset);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-medium);
+}
+
+#yes-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 40px rgba(255, 77, 125, 0.4);
+}
+
+#no-btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background: #ccc;
+    color: #666;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+#no-btn:hover {
+    background: #bbb;
+}
+
+#valentine-response {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+}
+
+#valentine-response p {
+    font-size: 1.3rem;
+    color: var(--pink-deep);
+    margin: 0;
+}
+
 .lock-icon {
     font-size: 4rem;
     margin-bottom: 20px;

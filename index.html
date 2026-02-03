@@ -35,8 +35,8 @@
                     <label>Seconds</label>
                 </div>
             </div>
-            <p class="countdown-date">Valentine's Day 2026 💝</p>
-            <p class="countdown-hint">Patience, Sanu... good things come to those who wait 🌸</p>
+            <p class="countdown-date">Valentine's Day 2025 💝</p>
+            <p class="countdown-hint">Patience, Sanu... ramro kura ko laagi wait garnu parcha 🌸</p>
         </div>
     </div>
 
@@ -53,6 +53,22 @@
             </div>
             <p id="password-error" class="password-error"></p>
             <p class="password-clue">Hint: Who is this Only for? 🤔</p>
+        </div>
+    </div>
+
+    <!-- Valentine Question Gate -->
+    <div id="valentine-question" class="fullscreen hidden">
+        <div class="floating-hearts"></div>
+        <div class="valentine-content">
+            <h1 class="valentine-title">Sanu... 💕</h1>
+            <p class="valentine-ask">Will you be my Valentine?</p>
+            <div class="valentine-buttons">
+                <button id="yes-btn" onclick="sayYes()">Yes! 💕</button>
+                <button id="no-btn" onmouseover="moveNoButton()" onclick="clickedNo()">No</button>
+            </div>
+            <div id="valentine-response" class="hidden">
+                <p id="response-text"></p>
+            </div>
         </div>
     </div>
 
@@ -93,9 +109,8 @@
                     <div class="meet-text">
                         <p class="quote">"Anyways, let me give you a reason to delete this app 🤭"</p>
                         <p class="context">
-                            Who knew a cheesy line on a dating app would lead to this? 
-                            You were in Chitwan, I was thinking "Nepali basni haru le Dil Mil use garchan?" 
-                            But there you were — and I just knew I had to shoot my shot.
+                            Timi Chitwan ma, ma sochirathe "Nepali basni haru le Dil Mil use garchan?" 
+                            But there you were. And I just knew I had to shoot my shot.
                         </p>
                         <p class="result">Spoiler: She deleted the app. 😏</p>
                     </div>
@@ -110,29 +125,7 @@
                 <p class="section-subtitle">From strangers to soulmates, one chat at a time</p>
                 
                 <div class="timeline">
-                    <!-- Day 1 -->
-                    <div class="timeline-item left">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Day 1</div>
-                            <h3>The "Fake Account" Era 😂</h3>
-                            <div class="chat-screenshot">
-                                <img src="images/chat-1.png" alt="Fake account suspicions">
-                            </div>
-                            <p>You were SO suspicious. "This is a fake account" energy was strong. But you couldn't resist my charm 😏</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item right">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Day 1</div>
-                            <h3>"Beautiful Family" Moment 🥺</h3>
-                            <div class="chat-screenshot">
-                                <img src="images/chat-2.png" alt="Beautiful family">
-                            </div>
-                            <p>The moment you saw my family and believed I was real. That meant everything.</p>
-                        </div>
-                    </div>
-
+                    <!-- Instant Connection -->
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <div class="timeline-date">The Beginning</div>
@@ -140,7 +133,7 @@
                             <div class="chat-screenshot">
                                 <img src="images/chat-11.png" alt="Feels like I've always known you">
                             </div>
-                            <p>"1 din bhacha but feels like I've always known you" — that's when I knew this was different.</p>
+                            <p>"1 din bhacha but feels like I've always known you" - that's when I knew this was different, Sanu.</p>
                         </div>
                     </div>
 
@@ -151,62 +144,128 @@
                             <div class="chat-screenshot">
                                 <img src="images/chat-12.png" alt="Haven't talked to anyone like this">
                             </div>
-                            <p>When you said you haven't talked to anyone like this in a long time... my heart did a thing.</p>
+                            <p>Timi le bhani "ma koi snga yesari long time boleko chaina"... mero heart le ali ali garyo 🥺</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Dec 5</div>
+                            <h3>The "Fake Account" Era 😂</h3>
+                            <div class="chat-screenshot">
+                                <img src="images/chat-1.png" alt="Fake account suspicions">
+                            </div>
+                            <p>You were SO suspicious haha. "Looks like an fake account" energy thiyo strong. I had to send Manang pics to prove I'm real!</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Building Trust</div>
+                            <h3>"Okay now I believe you" 🥺</h3>
+                            <div class="chat-screenshot">
+                                <img src="images/chat-2.png" alt="Family photo proves he's real">
+                            </div>
+                            <p>Mero parivar dekhera finally trust garyo. "🤣🤣🤣 sorryyyy" - that sorry was so cute.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Jan 19</div>
+                            <h3>Beautiful Family 💕</h3>
+                            <div class="chat-screenshot">
+                                <img src="images/chat-3.png" alt="Beautiful family, no waiting to reply">
+                            </div>
+                            <p>"Happy late national princess day" - because you ARE my princess. Also I told you I don't play that "waiting to reply" game. When it comes to you, I reply fast!</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Getting Serious</div>
+                            <h3>"I want to marry" 🥺</h3>
+                            <div class="chat-screenshot">
+                                <img src="images/chat-4.png" alt="I want to marry moment">
+                            </div>
+                            <p>When you said this with those 🥺🥺🥺 emojis... Sanu, my heart literally melted. Same feeling ho mero ni.</p>
                         </div>
                     </div>
 
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <div class="timeline-date">4:11 AM</div>
-                            <h3>The Playlist 🎵</h3>
+                            <h3>The Playlist Plan 🎵</h3>
                             <div class="chat-screenshot">
-                                <img src="images/chat-3.png" alt="Mero Sanu ko laagi playlist">
+                                <img src="images/chat-5.png" alt="Up till 4:11am making playlist">
                             </div>
-                            <p>"Mero Sanu ko laagi 💗🌸" — I made you a playlist at 4:11 AM. That's love, Sanu.</p>
+                            <p>"I was up till 4:11am making you a playlist and asking you to be my gf 🥰😘❤️" - yes Sanu, that's real dedication. Aniii mandir? Barsa ma? That's crazy 😇😇</p>
                         </div>
                     </div>
 
                     <div class="timeline-item right">
                         <div class="timeline-content">
-                            <div class="timeline-date">Peak Happiness</div>
-                            <h3>Katiiii Khushi 🥰</h3>
+                            <div class="timeline-date">The Surprise</div>
+                            <h3>Mero Sanu ko laagi 💚🌸</h3>
                             <div class="chat-screenshot">
-                                <img src="images/chat-4.png" alt="So happy">
+                                <img src="images/chat-6.png" alt="The Spotify playlist">
                             </div>
-                            <p>"Katiiii khushi chuuuuu" — your happiness is literally my happiness.</p>
+                            <p>Peonies kinne plan thiyo but timi in person dekhna sakdainau bhane phool marcha ni. So instead I made you a playlist with all our songs. Check that description 👀</p>
                         </div>
                     </div>
 
                     <div class="timeline-item left">
                         <div class="timeline-content">
-                            <div class="timeline-date">Official</div>
-                            <h3>Locked In 🔐</h3>
+                            <div class="timeline-date">Technical Difficulties</div>
+                            <h3>"Open bhayena kkk" 😅</h3>
                             <div class="chat-screenshot">
-                                <img src="images/chat-5.png" alt="We're locked in">
+                                <img src="images/chat-7.png" alt="Trying to open playlist">
                             </div>
-                            <p>"We're locked in" — no going back now, Princess. You're stuck with me forever.</p>
+                            <p>The suspense when it wouldn't open 😂 "Try again" - finally "Herey" 🥺</p>
                         </div>
                     </div>
 
                     <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">The Question</div>
+                            <h3>"Was that a question for real?" 😁</h3>
+                            <div class="chat-screenshot">
+                                <img src="images/chat-8.png" alt="Did you look at the description">
+                            </div>
+                            <p>"Did you look at the description?" - "I did" - "Hmmm" - "Was that a question for real?" - "Yes" - Sanu, I was so nervous waiting for your answer!</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
                         <div class="timeline-content">
                             <div class="timeline-date">December 7, 2025</div>
-                            <h3>Boyfriend & Girlfriend 💑</h3>
+                            <h3>YES!!!!!!! ❤️</h3>
                             <div class="chat-screenshot">
-                                <img src="images/official-chat.png" alt="Official boyfriend girlfriend">
+                                <img src="images/chat-9.png" alt="She said yes">
                             </div>
-                            <p>The day it became official. My girlfriend. My future wife. My everything.</p>
+                            <p>"Katiiii khushi chuuuuu" - ME TOOOO Sanu! "Just know there's no turning back from now, we're locked in 🔐" - Boyfriend/girlfriend official! Best moment of my life.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Official 💑</div>
+                            <h3>Locked In Forever 🔐</h3>
+                            <div class="chat-screenshot">
+                                <img src="images/official-chat.png" alt="Official couple">
+                            </div>
+                            <p>The day you became my girlfriend. My Princess 🎀. The contact name says it all.</p>
                         </div>
                     </div>
 
                     <div class="timeline-item left">
                         <div class="timeline-content">
-                            <div class="timeline-date">Princess Moments</div>
+                            <div class="timeline-date">Our Daily Vibes</div>
                             <h3>The Nepali Banter 🇳🇵</h3>
                             <div class="chat-screenshot">
                                 <img src="images/chat-10.png" alt="Princess banter">
                             </div>
-                            <p>"Please you are nepali act like one 😡" — you keeping me grounded while I use iPhone emojis 😅</p>
+                            <p>"Please you are nepali act like one 😡" - okay okay I'll stop using iPhone emojis 😅 But you love me anyway!</p>
                         </div>
                     </div>
 
@@ -217,7 +276,7 @@
                             <div class="chat-screenshot">
                                 <img src="images/videocall.png" alt="Video call together">
                             </div>
-                            <p>This face. This smile. The reason I look forward to every single day.</p>
+                            <p>This face. This smile. The reason I look forward to every single day. Timi lai dekhda kheri sab thik huncha.</p>
                         </div>
                     </div>
                 </div>
@@ -246,7 +305,7 @@
                 </div>
                 
                 <div class="promise-text">
-                    <p>This ring is a promise. A promise that one day, I'll replace it with something even more special — when I ask you to be my wife for real.</p>
+                    <p>Yo ring is a promise. A promise that one day, I'll replace it with something even more special. Jaba ma timi lai bihe ko laagi sodhchu for real.</p>
                     <p class="nepali-text">तिमी मेरो जीवनको सबभन्दा राम्रो कुरा हो। 💕</p>
                 </div>
             </div>
@@ -265,6 +324,16 @@
                     </div>
                     <div class="spotify-screenshot">
                         <img src="images/spotify-blend.png" alt="Our Spotify Blend">
+                    </div>
+                    <div class="songs-list">
+                        <h3>Songs That Remind Me of You</h3>
+                        <ul>
+                            <li>🎵 Euta Manchekko - Narayan Gopal</li>
+                            <li>🎵 Behuli - Sajjan Raj Vaidya</li>
+                            <li>🎵 Rataan Lambiyaan</li>
+                            <li>🎵 Je Chhau Timi - Swoopna Suman</li>
+                            <li>🎵 Anything by Sujan Chapagain 💕</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -295,11 +364,11 @@
                         
                         <p>Hijo samma ta timi mero laagi ek random match thiyo Dil Mil ma. Aaja, timi mero sansar ho.</p>
                         
-                        <p>I still remember that first conversation — me trying to be smooth with "let me give you a reason to delete this app" and you, rightfully suspicious that I might be a fake account. 😂 But something about talking to you felt different from the very first message.</p>
+                        <p>I still remember that first conversation. Me trying to be smooth with "let me give you a reason to delete this app" and you, rightfully suspicious that I might be a fake account 😂 But something about talking to you felt different from the very first message.</p>
                         
-                        <p>"1 din bhacha but feels like I've always known you" — you said that early on, and I felt the exact same way. Like my soul recognized yours before my mind could catch up.</p>
+                        <p>"1 din bhacha but feels like I've always known you" - you said that early on, and I felt the exact same way. Like my soul recognized yours before my mind could catch up.</p>
                         
-                        <p>Every video call, every late night conversation, every "timro naak kasto cha?" and bajya moment — they've all become my favorite memories. You turned a stranger into my best friend, my confidant, my future wife.</p>
+                        <p>Every video call, every late night conversation, every "timro naak kasto cha?" and bajya moment... they've all become my favorite memories. You turned a stranger into my best friend, my confidant, my future wife.</p>
                         
                         <p>Ma timilai kasari bhannu yo maya? Words ma samaudaina. But I'll spend every day trying to show you.</p>
                         
@@ -314,7 +383,7 @@
                             <span class="signature">Your Future Husband 💍</span>
                         </p>
                         
-                        <p class="letter-ps">P.S. — 69 times I love you. You know why. 😏</p>
+                        <p class="letter-ps">P.S. - 69 times I love you. You know why. 😏</p>
                     </div>
                 </div>
             </div>
@@ -394,4 +463,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
