@@ -211,17 +211,24 @@ function initDaysTogether() {
 const quizQuestions = [
     {
         question: "What dating app did we meet on? 💕",
-        options: ["Tinder", "Bumble", "Dil Mil", "Hinge"],
-        correct: 2,
+        options: ["Instagram", "Bumble", "Dil Mil", "Hinge"],
+        correct: 0, // Instagram is correct
+        specialBehavior: "conditional",
+        specialConfig: {
+            warningIndex: 2, // Dil Mil - shows warning, allows retry
+            warningMessage: "We won't tell anyone that it was Dil Mil",
+            correctMessage: "see I listen to you 😏💕"
+        },
         response: {
-            correct: "Yes! Dil Mil brought us together! 💕",
-            wrong: "Nope! It was Dil Mil. Where I found my soulmate 🥰"
+            correct: "see I listen to you 😏💕",
+            wrong: "Try another answer, princess! 💕"
         }
     },
     {
         question: "What time did we officially become boyfriend/girlfriend? ⏰",
         options: ["11:11 PM", "4:11 AM", "2:30 AM", "Midnight"],
         correct: 1,
+        specialBehavior: null,
         response: {
             correct: "4:11 AM! You remembered! 💝",
             wrong: "It was 4:11 AM. The most magical time 🌙"
@@ -229,40 +236,57 @@ const quizQuestions = [
     },
     {
         question: "What's your nickname that I use the most? 🥰",
-        options: ["Baby", "Sanu", "Honey", "Jaan"],
-        correct: 1,
+        options: ["Baby", "Sanu", "Mutu", "Sweetheart"],
+        correct: -1, // No single correct answer
+        specialBehavior: "multi-correct",
+        specialConfig: {
+            popupMessage: "I love calling you all these things",
+            additionalText: "but in bed I call you other things 😈"
+        },
         response: {
-            correct: "My Sanu! Forever and always 💕",
-            wrong: "It's Sanu! Mero pyaro Sanu 🥰"
+            correct: "All of them! Every single one! 💕",
+            wrong: ""
         }
     },
     {
-        question: "Where in Nepal are you from? 🇳🇵",
-        options: ["Kathmandu", "Pokhara", "Chitwan", "Butwal"],
-        correct: 2,
+        question: "What is Kishor's favorite sport? 🏈",
+        options: ["Basketball", "Football", "Soccer", "Baseball"],
+        correct: 1,
+        specialBehavior: null,
         response: {
-            correct: "Chitwan! I love that about you 🐘",
-            wrong: "Chitwan, sanu! The beautiful Chitwan 🌿"
+            correct: "Football! You know your man! 🏈💕",
+            wrong: "It's Football! I love watching games with you in mind 🥰"
         }
     },
     {
-        question: "What was my smooth pickup line on Dil Mil? 😏",
-        options: [
-            "Are you a magician?",
-            "Let me give you a reason to delete this app",
-            "Do you believe in love at first swipe?",
-            "Hey beautiful"
-        ],
-        correct: 1,
+        question: "If you had any superpower for a day, which superpower would you choose? 😂",
+        options: ["Teleportation", "Flying", "Strength", "Unlimited Money"],
+        correct: 0,
+        specialBehavior: "retry",
+        specialConfig: {
+            retryMessage: "Choose again princess, think hard about this one",
+            allowRetry: true
+        },
         response: {
-            correct: "And it WORKED! 😏💕",
-            wrong: "It was 'Let me give you a reason to delete this app'. And you did! 😏"
+            correct: "Yes! Teleportation so you can visit me instantly! 💕",
+            wrong: "Choose again princess, think hard about this one"
+        }
+    },
+    {
+        question: "What is Kishor's favorite Anime? 🎌",
+        options: ["One Piece", "Death Note", "Naruto", "Dragonball Z"],
+        correct: 0,
+        specialBehavior: null,
+        response: {
+            correct: "One Piece! Going Merry! Luffy would be proud! 🏴‍☠️💕",
+            wrong: "It's One Piece, Sanu! The best anime ever! 🏴‍☠️"
         }
     },
     {
         question: "What did you think I was when we first talked? 😂",
         options: ["A catfish", "A fake account", "A scammer", "A bot"],
         correct: 1,
+        specialBehavior: null,
         response: {
             correct: "Haha yes! You were so suspicious 😂",
             wrong: "You literally said 'Looks like an fake account' 😂💀"
@@ -272,6 +296,7 @@ const quizQuestions = [
         question: "What's your favorite color? 🎨",
         options: ["Blue", "Purple", "Pink", "Red"],
         correct: 2,
+        specialBehavior: null,
         response: {
             correct: "Pink! Just like this whole website 💕",
             wrong: "It's PINK, sanu! How could you forget? 💗"
@@ -281,6 +306,7 @@ const quizQuestions = [
         question: "What dessert combo do you love? 🍫",
         options: ["Cake & ice cream", "Brownie & ice cream", "Cookies & milk", "Tiramisu"],
         correct: 1,
+        specialBehavior: null,
         response: {
             correct: "Brownie + ice cream = your happiness 🍫🍨",
             wrong: "Brownie and ice cream! I'll get you some soon 🥰"
@@ -295,6 +321,7 @@ const quizQuestions = [
             "Timro kaan kasto cha?"
         ],
         correct: 1,
+        specialBehavior: null,
         response: {
             correct: "TIMRO NAAK KASTO CHA 😂😂😂",
             wrong: "It's 'Timro naak kasto cha?' Our classic 😂"
@@ -304,6 +331,7 @@ const quizQuestions = [
         question: "What did I promise to give you one day? 💍",
         options: ["A car", "A house", "A wedding ring", "All of the above"],
         correct: 3,
+        specialBehavior: null,
         response: {
             correct: "All of it, sanu. Everything for my Princess 👑💍",
             wrong: "ALL OF THE ABOVE, baby! You deserve the world 🌍💕"
@@ -352,26 +380,93 @@ function showQuestion() {
 function selectAnswer(index) {
     const q = quizQuestions[currentQuestion];
     const options = document.querySelectorAll('.quiz-option');
-    
+    const resultEl = document.getElementById('quiz-result');
+
     // Disable all options
     options.forEach(opt => opt.style.pointerEvents = 'none');
-    
-    // Mark correct/incorrect
-    options[index].classList.add(index === q.correct ? 'correct' : 'incorrect');
-    if (index !== q.correct) {
-        options[q.correct].classList.add('correct');
+
+    // Handle special behaviors
+    if (q.specialBehavior === 'conditional') {
+        // Question 1: Conditional logic for dating app
+        if (index === q.specialConfig.warningIndex) {
+            // Dil Mil - show yellow warning, allow retry (don't count as correct)
+            options[index].classList.add('incorrect');
+            showQuizPopup(q.specialConfig.warningMessage, null, 'warning');
+            return; // Warning popup will reset options for retry
+        } else if (index === q.correct) {
+            // Instagram - correct answer
+            options[index].classList.add('correct');
+            score++;
+            resultEl.classList.remove('hidden');
+            resultEl.innerHTML = `<p>${q.specialConfig.correctMessage}</p>`;
+        } else {
+            // Wrong answer
+            options[index].classList.add('incorrect');
+            options[q.correct].classList.add('correct');
+            resultEl.classList.remove('hidden');
+            resultEl.innerHTML = `<p>${q.response.wrong}</p>`;
+        }
     }
-    
-    // Update score
-    if (index === q.correct) {
-        score++;
+    else if (q.specialBehavior === 'multi-correct') {
+        // Question 3: All options turn green
+        options.forEach(opt => opt.classList.add('correct'));
+        score++; // Always correct
+        showQuizPopup(
+            q.specialConfig.popupMessage,
+            q.specialConfig.additionalText
+        );
+        return; // Popup will handle advancement
     }
-    
-    // Show response
-    const responseText = index === q.correct ? q.response.correct : q.response.wrong;
-    
-    // Move to next question after delay
+    else if (q.specialBehavior === 'retry') {
+        // Question 5: Allow retry on wrong answer
+        if (index === q.correct) {
+            options[index].classList.add('correct');
+            score++;
+            resultEl.classList.remove('hidden');
+            resultEl.innerHTML = `<p>${q.response.correct}</p>`;
+            // Normal advancement
+            setTimeout(() => {
+                resultEl.classList.add('hidden');
+                currentQuestion++;
+                showQuestion();
+            }, 2000);
+        } else {
+            // Wrong answer - show retry message, re-enable options
+            options[index].classList.add('incorrect');
+
+            // Show retry message temporarily
+            resultEl.classList.remove('hidden');
+            resultEl.innerHTML = `<p class="retry-message">${q.specialConfig.retryMessage}</p>`;
+
+            setTimeout(() => {
+                // Reset this option and re-enable all options
+                options[index].classList.remove('incorrect');
+                options.forEach(opt => opt.style.pointerEvents = 'auto');
+                resultEl.classList.add('hidden');
+            }, 1500);
+        }
+        return; // Don't auto-advance
+    }
+    else {
+        // Standard behavior
+        options[index].classList.add(index === q.correct ? 'correct' : 'incorrect');
+        if (index !== q.correct) {
+            options[q.correct].classList.add('correct');
+        }
+
+        if (index === q.correct) {
+            score++;
+        }
+
+        // Show response message
+        const responseText = index === q.correct ? q.response.correct : q.response.wrong;
+        resultEl.classList.remove('hidden');
+        resultEl.innerHTML = `<p>${responseText}</p>`;
+    }
+
+    // Auto-advance for standard and conditional questions
     setTimeout(() => {
+        resultEl.classList.add('hidden');
         currentQuestion++;
         showQuestion();
     }, 2000);
@@ -419,6 +514,44 @@ function showQuizResult() {
     }
     
     resultEl.innerHTML = message;
+}
+
+// ========================================
+// Quiz Popup System
+// ========================================
+function showQuizPopup(message, additionalText = null, type = 'default') {
+    const popup = document.createElement('div');
+    popup.className = 'quiz-popup';
+    popup.dataset.type = type; // Store type for closeQuizPopup
+    popup.innerHTML = `
+        <div class="quiz-popup-content ${type === 'warning' ? 'warning' : ''}">
+            <p class="quiz-popup-message">${message}</p>
+            ${additionalText ? `<p class="quiz-popup-additional">${additionalText}</p>` : ''}
+            <button class="quiz-popup-close" onclick="closeQuizPopup()">Continue 💕</button>
+        </div>
+    `;
+    document.body.appendChild(popup);
+}
+
+function closeQuizPopup() {
+    const popup = document.querySelector('.quiz-popup');
+    if (popup) {
+        const type = popup.dataset.type;
+        popup.remove();
+
+        if (type === 'warning') {
+            // Warning popup: reset options and allow retry
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('incorrect', 'correct');
+                opt.style.pointerEvents = 'auto';
+            });
+        } else {
+            // Default popup: advance to next question
+            currentQuestion++;
+            showQuestion();
+        }
+    }
 }
 
 // ========================================
