@@ -118,20 +118,68 @@ function sayYes() {
     // Celebration effect
     celebrateEntry();
     
-    // After 2 seconds, show main content
+    // After 2.5 seconds, show unlock countdown (or main content if Valentine's Day)
     setTimeout(() => {
         document.getElementById('valentine-question').classList.add('hidden');
-        document.getElementById('main-content').classList.remove('hidden');
-        document.getElementById('music-player').classList.remove('hidden');
         
-        // Initialize everything
-        initDaysTogether();
-        initQuiz();
-        createFloatingHearts();
-        
-        // Smooth scroll to top
-        window.scrollTo(0, 0);
+        // Check if it's already Valentine's Day
+        const now = new Date();
+        if (now >= CONFIG.valentinesDay) {
+            // It's Valentine's Day! Show main content
+            showMainContent();
+        } else {
+            // Not yet - show countdown to unlock
+            document.getElementById('unlock-countdown').classList.remove('hidden');
+            startUnlockCountdown();
+        }
     }, 2500);
+}
+
+// Unlock countdown timer
+let unlockCountdownInterval = null;
+
+function startUnlockCountdown() {
+    updateUnlockCountdown();
+    unlockCountdownInterval = setInterval(updateUnlockCountdown, 1000);
+}
+
+function updateUnlockCountdown() {
+    const now = new Date();
+    const diff = CONFIG.valentinesDay - now;
+    
+    if (diff <= 0) {
+        // Valentine's Day has arrived! Unlock the content
+        if (unlockCountdownInterval) {
+            clearInterval(unlockCountdownInterval);
+            unlockCountdownInterval = null;
+        }
+        document.getElementById('unlock-countdown').classList.add('hidden');
+        showMainContent();
+        return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('unlock-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('unlock-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('unlock-minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('unlock-seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+function showMainContent() {
+    document.getElementById('main-content').classList.remove('hidden');
+    document.getElementById('music-player').classList.remove('hidden');
+    
+    // Initialize everything
+    initDaysTogether();
+    initQuiz();
+    createFloatingHearts();
+    
+    // Smooth scroll to top
+    window.scrollTo(0, 0);
 }
 
 function moveNoButton() {
