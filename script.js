@@ -64,15 +64,20 @@ function checkPassword() {
     const error = document.getElementById('password-error');
 
     if (input.value === CONFIG.password) {
-        // Correct password! Show valentine question
-        // Stop the countdown timer to prevent it from showing password screen again
+        // Correct password! Show main content
+        // Stop any countdown timer
         if (countdownInterval) {
             clearInterval(countdownInterval);
             countdownInterval = null;
         }
+        if (unlockCountdownInterval) {
+            clearInterval(unlockCountdownInterval);
+            unlockCountdownInterval = null;
+        }
         
         document.getElementById('password-screen').classList.add('hidden');
-        document.getElementById('valentine-question').classList.remove('hidden');
+        showMainContent();
+        celebrateEntry();
     } else {
         // Wrong password
         error.textContent = CONFIG.wrongPasswordMessages[CONFIG.wrongPasswordIndex];
@@ -127,10 +132,12 @@ function sayYes() {
         if (now >= CONFIG.valentinesDay) {
             // It's Valentine's Day! Show password screen
             document.getElementById('password-screen').classList.remove('hidden');
+            saveState('password');
         } else {
             // Not yet - show countdown to unlock
             document.getElementById('unlock-countdown').classList.remove('hidden');
             startUnlockCountdown();
+            saveState('countdown');
         }
     }, 2500);
 }
@@ -172,6 +179,9 @@ function updateUnlockCountdown() {
 function showMainContent() {
     document.getElementById('main-content').classList.remove('hidden');
     document.getElementById('music-player').classList.remove('hidden');
+    
+    // Save state
+    saveState('main');
     
     // Initialize everything
     initDaysTogether();
@@ -243,10 +253,12 @@ function clickedNo() {
             if (now >= CONFIG.valentinesDay) {
                 // It's Valentine's Day! Show password screen
                 document.getElementById('password-screen').classList.remove('hidden');
+                saveState('password');
             } else {
                 // Not yet - show countdown to unlock
                 document.getElementById('unlock-countdown').classList.remove('hidden');
                 startUnlockCountdown();
+                saveState('countdown');
             }
             
             celebrateEntry();
@@ -745,28 +757,109 @@ function closePopup() {
 }
 
 // ========================================
+// State Persistence (localStorage)
+// ========================================
+const STATE_KEY = 'priyanka_valentine_state';
+
+function saveState(screen) {
+    try {
+        localStorage.setItem(STATE_KEY, JSON.stringify({
+            screen: screen,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.log('Could not save state:', e);
+    }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STATE_KEY);
+        if (saved) {
+            return JSON.parse(saved);
+        }
+    } catch (e) {
+        console.log('Could not load state:', e);
+    }
+    return null;
+}
+
+function clearState() {
+    try {
+        localStorage.removeItem(STATE_KEY);
+    } catch (e) {
+        console.log('Could not clear state:', e);
+    }
+}
+
+// ========================================
 // Initialize
 // ========================================
 let countdownInterval = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // SHOW VALENTINE QUESTION DIRECTLY (skip countdown and password)
-    // Valentine question is shown first - no countdown or password gates
+    // Hide all screens first
     document.getElementById('countdown-screen').classList.add('hidden');
     document.getElementById('password-screen').classList.add('hidden');
-    document.getElementById('valentine-question').classList.remove('hidden');
+    document.getElementById('valentine-question').classList.add('hidden');
+    document.getElementById('unlock-countdown').classList.add('hidden');
+    document.getElementById('main-content').classList.add('hidden');
     
-    // Create floating hearts for the valentine question screen
-    createFloatingHearts();
+    // Check for saved state
+    const savedState = loadState();
     
-    // For testing: add ?skip to URL to skip everything and go to main content
+    // For testing: add ?reset to URL to clear state
+    if (window.location.search.includes('reset')) {
+        clearState();
+        window.location.href = window.location.pathname;
+        return;
+    }
+    
+    // For testing: add ?skip to URL to skip everything
     if (window.location.search.includes('skip')) {
-        document.getElementById('valentine-question').classList.add('hidden');
         document.getElementById('main-content').classList.remove('hidden');
         document.getElementById('music-player').classList.remove('hidden');
         initDaysTogether();
         initQuiz();
+        createFloatingHearts();
+        return;
     }
+    
+    // Restore state or show valentine question
+    if (savedState) {
+        const now = new Date();
+        
+        switch (savedState.screen) {
+            case 'countdown':
+                // Check if Valentine's Day arrived while away
+                if (now >= CONFIG.valentinesDay) {
+                    document.getElementById('password-screen').classList.remove('hidden');
+                    saveState('password');
+                } else {
+                    document.getElementById('unlock-countdown').classList.remove('hidden');
+                    startUnlockCountdown();
+                }
+                break;
+            case 'password':
+                document.getElementById('password-screen').classList.remove('hidden');
+                break;
+            case 'main':
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('music-player').classList.remove('hidden');
+                initDaysTogether();
+                initQuiz();
+                break;
+            default:
+                // Unknown state, show valentine question
+                document.getElementById('valentine-question').classList.remove('hidden');
+        }
+    } else {
+        // No saved state - show valentine question
+        document.getElementById('valentine-question').classList.remove('hidden');
+    }
+    
+    // Create floating hearts
+    createFloatingHearts();
 });
 
 // ========================================
