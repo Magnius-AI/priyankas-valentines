@@ -391,6 +391,37 @@
             </div>
         </section>
 
+        <!-- Our Diary Section -->
+        <section id="our-diary" class="section">
+            <div class="container">
+                <h2 class="section-title">Our Diary 📖</h2>
+                <p class="section-subtitle">Write your thoughts, feelings, and little love notes to each other</p>
+
+                <div class="diary-form-container">
+                    <div class="diary-author-select">
+                        <button class="diary-author-btn active" data-author="priyanka" onclick="selectDiaryAuthor('priyanka')">Priyanka 👸</button>
+                        <button class="diary-author-btn" data-author="kishor" onclick="selectDiaryAuthor('kishor')">Kishor 🤴</button>
+                    </div>
+                    <textarea id="diary-input" placeholder="What's on your heart today, Sanu? 💕"></textarea>
+                    <div class="diary-mood-select">
+                        <span class="mood-label">How are you feeling?</span>
+                        <button class="mood-btn" data-mood="😊" onclick="selectMood(this)">😊</button>
+                        <button class="mood-btn" data-mood="😍" onclick="selectMood(this)">😍</button>
+                        <button class="mood-btn" data-mood="🥰" onclick="selectMood(this)">🥰</button>
+                        <button class="mood-btn" data-mood="😢" onclick="selectMood(this)">😢</button>
+                        <button class="mood-btn" data-mood="💕" onclick="selectMood(this)">💕</button>
+                    </div>
+                    <button id="diary-submit" onclick="submitDiary()">📝 Add Entry</button>
+                    <p id="diary-success" class="success-message hidden">Entry saved! 💕</p>
+                    <p id="diary-error" class="error-message hidden"></p>
+                </div>
+
+                <div id="diary-entries-list" class="diary-entries-list">
+                    <p class="empty-notes">Loading diary entries... 💭</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Better Boyfriend Section -->
 <section id="better-boyfriend" class="section">
   <div class="container">
@@ -524,6 +555,8 @@
         </audio>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

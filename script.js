@@ -140,7 +140,7 @@ function initScrollAnimations() {
     });
 
     // Also reveal other content blocks
-    document.querySelectorAll('.meet-text, .promise-text, .future-text, .letter-container, .spotify-section, #quiz-container, .boyfriend-container, .closing-text').forEach(el => {
+    document.querySelectorAll('.meet-text, .promise-text, .future-text, .letter-container, .spotify-section, #quiz-container, .diary-form-container, .boyfriend-container, .closing-text').forEach(el => {
         if (!el.classList.contains('reveal')) el.classList.add('reveal');
     });
 
@@ -326,6 +326,7 @@ function showMainContent() {
     initQuiz();
     initAllFloatingHearts();
     initScrollAnimations();
+    renderDiaryEntries();
     initParallax();
     
     window.scrollTo(0, 0);
@@ -826,30 +827,32 @@ function closePopup() {
 }
 
 // ========================================
-// Better Boyfriend Section
+// Better Boyfriend Section (Supabase-backed)
 // ========================================
-function submitBoyfriendNote() {
+async function submitBoyfriendNote() {
     const input = document.getElementById('boyfriend-input');
     const success = document.getElementById('boyfriend-success');
     const text = input.value.trim();
     
     if (!text) return;
     
-    // Save to localStorage
     try {
-        const notes = JSON.parse(localStorage.getItem('boyfriend_notes') || '[]');
-        notes.push({
-            text: text,
-            date: new Date().toISOString()
-        });
-        localStorage.setItem('boyfriend_notes', JSON.stringify(notes));
+        await submitBoyfriendNoteSupabase(text);
+        input.value = '';
+        success.classList.remove('hidden');
+        setTimeout(() => success.classList.add('hidden'), 3000);
     } catch (e) {
         console.log('Could not save note:', e);
+        // Fallback to localStorage
+        try {
+            const notes = JSON.parse(localStorage.getItem('boyfriend_notes') || '[]');
+            notes.push({ text, date: new Date().toISOString() });
+            localStorage.setItem('boyfriend_notes', JSON.stringify(notes));
+            input.value = '';
+            success.classList.remove('hidden');
+            setTimeout(() => success.classList.add('hidden'), 3000);
+        } catch (e2) { console.log('localStorage fallback failed:', e2); }
     }
-    
-    input.value = '';
-    success.classList.remove('hidden');
-    setTimeout(() => success.classList.add('hidden'), 3000);
 }
 
 function toggleBoyfriendView() {
@@ -871,23 +874,111 @@ function checkBoyfriendPassword() {
     }
 }
 
-function loadBoyfriendNotes() {
+async function loadBoyfriendNotes() {
     const list = document.getElementById('notes-list');
     try {
-        const notes = JSON.parse(localStorage.getItem('boyfriend_notes') || '[]');
+        const notes = await loadBoyfriendNotesSupabase();
         if (notes.length === 0) {
             list.innerHTML = '<p class="empty-notes">No notes yet... waiting for my Princess to write something 🥺</p>';
         } else {
             list.innerHTML = notes.map(n => `
                 <div class="note-item">
-                    <div class="note-date">${new Date(n.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
-                    <div class="note-text">${n.text}</div>
+                    <div class="note-date">${relativeTime(n.created_at)}</div>
+                    <div class="note-text">${escapeHtml(n.content)}</div>
                 </div>
             `).join('');
         }
     } catch (e) {
-        list.innerHTML = '<p class="empty-notes">Could not load notes</p>';
+        // Fallback to localStorage
+        try {
+            const notes = JSON.parse(localStorage.getItem('boyfriend_notes') || '[]');
+            if (notes.length === 0) {
+                list.innerHTML = '<p class="empty-notes">No notes yet... waiting for my Princess to write something 🥺</p>';
+            } else {
+                list.innerHTML = notes.map(n => `
+                    <div class="note-item">
+                        <div class="note-date">${new Date(n.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+                        <div class="note-text">${escapeHtml(n.text)}</div>
+                    </div>
+                `).join('');
+            }
+        } catch (e2) {
+            list.innerHTML = '<p class="empty-notes">Could not load notes</p>';
+        }
     }
+}
+
+// ========================================
+// Our Diary Section
+// ========================================
+let selectedDiaryAuthor = 'priyanka';
+let selectedMood = null;
+
+function selectDiaryAuthor(author) {
+    selectedDiaryAuthor = author;
+    document.querySelectorAll('.diary-author-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.author === author);
+    });
+}
+
+function selectMood(btn) {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedMood = btn.dataset.mood;
+}
+
+async function submitDiary() {
+    const input = document.getElementById('diary-input');
+    const success = document.getElementById('diary-success');
+    const errorEl = document.getElementById('diary-error');
+    const text = input.value.trim();
+    
+    if (!text) return;
+    
+    try {
+        await submitDiaryEntry(selectedDiaryAuthor, text, selectedMood);
+        input.value = '';
+        selectedMood = null;
+        document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+        success.classList.remove('hidden');
+        errorEl.classList.add('hidden');
+        setTimeout(() => success.classList.add('hidden'), 3000);
+        renderDiaryEntries();
+    } catch (e) {
+        errorEl.textContent = 'Could not save entry. Please try again 💔';
+        errorEl.classList.remove('hidden');
+        console.log('Diary submit error:', e);
+    }
+}
+
+async function renderDiaryEntries() {
+    const list = document.getElementById('diary-entries-list');
+    try {
+        const entries = await loadDiaryEntries();
+        if (entries.length === 0) {
+            list.innerHTML = '<p class="empty-notes">No diary entries yet... be the first to write something! 💭</p>';
+        } else {
+            list.innerHTML = entries.map(e => `
+                <div class="diary-card">
+                    <div class="diary-card-header">
+                        <span class="diary-author">${e.author === 'kishor' ? '🤴 Kishor' : '👸 Priyanka'}</span>
+                        ${e.mood ? `<span class="diary-mood">${escapeHtml(e.mood)}</span>` : ''}
+                    </div>
+                    <div class="diary-card-content">${escapeHtml(e.content)}</div>
+                    <div class="diary-card-time">${relativeTime(e.created_at)}</div>
+                </div>
+            `).join('');
+        }
+    } catch (e) {
+        list.innerHTML = '<p class="empty-notes">Could not load diary entries 💔</p>';
+    }
+}
+
+// HTML escape helper
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 // ========================================
