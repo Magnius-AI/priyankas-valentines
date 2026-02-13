@@ -464,12 +464,12 @@ const quizQuestions = [
     },
     {
         question: "What time did we officially become boyfriend/girlfriend? ⏰",
-        options: ["11:11 PM", "4:11 AM", "2:30 AM", "Midnight"],
+        options: ["11:11 PM / 9:56 AM NPT", "4:11 AM / 2:56 PM NPT", "2:30 AM / 1:15 PM NPT", "Midnight / 10:45 AM NPT"],
         correct: 1,
         specialBehavior: null,
         response: {
-            correct: "4:11 AM! You remembered! 💝",
-            wrong: "It was 4:11 AM. The most magical time 🌙"
+            correct: "4:11 AM / 2:56 PM NPT! You remembered! 💝",
+            wrong: "It was 4:11 AM / 2:56 PM Nepal Time. The most magical time 🌙"
         }
     },
     {
