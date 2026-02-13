@@ -1066,6 +1066,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initAllFloatingHearts();
         initScrollAnimations();
         initParallax();
+        renderDiaryEntries();
         return;
     }
     
@@ -1092,6 +1093,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 initQuiz();
                 initScrollAnimations();
                 initParallax();
+                renderDiaryEntries();
                 break;
             default:
                 document.getElementById('valentine-question').classList.remove('hidden');
